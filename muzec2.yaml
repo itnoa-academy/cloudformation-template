@@ -1,0 +1,24 @@
+Parameters:
+  SubnetId:
+    Type: String 
+  ImageId:
+    Type: String  
+  KeyName1:
+    Type: String  
+
+
+
+Resources:
+  mysecondec2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t3a.medium
+      SubnetId: !Ref SubnetId
+      ImageId: !Ref ImageId
+      KeyName: !Ref KeyName1
+      BlockDeviceMappings:
+        - DeviceName: /dev/sda1
+          Ebs:
+            VolumeSize: 30
+            VolumeType: gp3
+            DeleteOnTermination: true

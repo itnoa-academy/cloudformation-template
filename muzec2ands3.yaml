@@ -1,0 +1,26 @@
+Parameters:
+  SubnetId:
+    Type: String
+  ImageId:
+    Type: String
+  KeyName:
+    Type: String  
+  Bucketname:
+    Type: String    
+
+
+
+Resources:
+  myec2instance:
+    Type: AWS::EC2::Instance
+    DependsOn: mys3bucket
+    Properties:
+      InstanceType: t3a.medium
+      ImageId: !Ref ImageId
+      SubnetId: !Ref SubnetId
+      KeyName: !Ref KeyName
+
+  mys3bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref Bucketname
