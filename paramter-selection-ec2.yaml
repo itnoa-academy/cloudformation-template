@@ -1,0 +1,35 @@
+Parameters:
+  Instancetype:
+    Type: String
+    AllowedValues:
+      - t2.micro
+      - t2.medium 
+      - t3a.medium
+  ImageId:
+    Type: String
+  SubnetId:
+    #Type: AWS::EC2::Subnet::Id
+    Type: String
+    AllowedPattern: ^subnet-[a-z0-9]+$
+  VPCId: 
+    Type: AWS::EC2::VPC::Id 
+
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName  
+    AllowedValues:
+      - key1
+      - keyxyz
+
+  SecurityGroupIds:
+    Type: AWS::EC2::SecurityGroup::Id
+  
+Resources:
+  my26thec2instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref Instancetype 
+      ImageId: !Ref ImageId
+      SubnetId: !Ref SubnetId
+      VPCId: !Ref VPCId
+      KeyName: !Ref KeyName
+      SecurityGroupIds: !Ref SecurityGroupIds
